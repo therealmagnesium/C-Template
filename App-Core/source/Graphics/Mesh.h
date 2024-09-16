@@ -8,6 +8,8 @@ struct Mesh
     std::vector<Vertex> vertices;
     std::vector<u32> indices;
 
+    u32 materialIndex;
+
     VertexArray vertexArray;
     VertexBuffer vertexBuffer;
     IndexBuffer indexBuffer;

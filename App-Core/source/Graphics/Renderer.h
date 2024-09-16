@@ -1,6 +1,7 @@
 #pragma once
 #include "Graphics/Material.h"
 #include "Graphics/Mesh.h"
+#include "Graphics/Model.h"
 #include "Graphics/RendererInternal.h"
 #include "Graphics/Shader.h"
 
@@ -14,6 +15,7 @@ struct RenderState
     void BeginDrawing();
     void EndDrawing();
     void DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material);
+    void DrawModel(Model& model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 };
 
 extern RenderState Renderer;

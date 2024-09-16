@@ -2,7 +2,7 @@
 #include "Core/Base.h"
 #include "Graphics/RendererInternal.h"
 
-Mesh::Mesh() {}
+Mesh::Mesh() { materialIndex = 0; }
 
 Mesh::Mesh(Vertex* vertices, u64 vertexCount, u32* indices, u64 indexCount)
 {
@@ -11,6 +11,7 @@ Mesh::Mesh(Vertex* vertices, u64 vertexCount, u32* indices, u64 indexCount)
 
 void Mesh::Create(Vertex* vertices, u64 vertexCount, u32* indices, u64 indexCount)
 {
+    materialIndex = 0;
     vertexArray = CreateVertexArray();
     vertexBuffer = CreateVertexBuffer();
     indexBuffer = CreateIndexBuffer();

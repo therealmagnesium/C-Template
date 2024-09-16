@@ -10,6 +10,7 @@
 
 #include <Graphics/Camera.h>
 #include <Graphics/Mesh.h>
+#include <Graphics/Model.h>
 #include <Graphics/Renderer.h>
 #include <Graphics/Texture.h>
 
@@ -19,6 +20,7 @@
 static Camera camera;
 static Mesh mesh;
 static Material material;
+static Model model;
 
 static void OnCreate()
 {
@@ -50,6 +52,8 @@ static void OnCreate()
     material.shader = Renderer.state.defaultShader;
     material.maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("assets/textures/texel_checker.png", RGBA);
     material.maps[MATERIAL_MAP_DIFFUSE].color = {1.f, 1.f, 1.f, 1.f};
+
+    model = LoadModel("assets/models/backpack/backpack.obj");
 }
 
 static void OnUpdate() { UpdateCamera(CAMERA_FREE); }
@@ -63,6 +67,8 @@ static void OnRender()
     model = glm::rotate(model, glm::radians(0.f), {0.f, 0.f, 1.f});
     model = glm::scale(model, {2.f, 2.f, 1.f});
     Renderer.DrawMesh(mesh, model, material);
+
+    // Renderer.DrawModel(model, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(1.f, 1.f, 1.f));
 }
 
 static void OnRenderUI() {}

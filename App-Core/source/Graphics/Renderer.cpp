@@ -63,3 +63,20 @@ void RenderState::DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material)
 
     material.shader.Unbind();
 }
+
+void RenderState::DrawModel(Model& model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+{
+    model.transform = glm::mat4(1.f);
+    model.transform = glm::translate(model.transform, position);
+    model.transform = glm::rotate(model.transform, glm::radians(rotation.x), {1.f, 0.f, 0.f});
+    model.transform = glm::rotate(model.transform, glm::radians(rotation.y), {0.f, 1.f, 0.f});
+    model.transform = glm::rotate(model.transform, glm::radians(rotation.z), {0.f, 0.f, 1.f});
+    model.transform = glm::scale(model.transform, scale);
+
+    Material defaultMaterial;
+    defaultMaterial.shader = state.defaultShader;
+    defaultMaterial.maps[MATERIAL_MAP_DIFFUSE].color = {1.f, 1.f, 1.f, 1.f};
+
+    for (u64 i = 0; i < model.meshes.size(); i++)
+        this->DrawMesh(model.meshes[i], model.transform, model.materials[model.meshes[i].materialIndex]);
+}

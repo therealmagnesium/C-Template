@@ -9,38 +9,39 @@ targetdir("../bin/" .. outputdir .. "/%{prj.name}")
 objdir("../build/" .. outputdir .. "/%{prj.name}")
 
 files({
-	"source/**.h",
-	"source/**.cpp",
+    "source/**.h",
+    "source/**.cpp",
 })
 
 includedirs({
-	"../App-Core/source",
-	"../vendor/glm",
-	"../vendor/glad/include",
-	"../vendor/stb_image/include",
+    "../App-Core/source",
+    "../vendor/glm",
+    "../vendor/glad/include",
+    "../vendor/stb_image/include",
 })
 
 libdirs({
-	"../vendor/glad/lib",
-	"../vendor/stb_image/lib",
+    "../vendor/glad/lib",
+    "../vendor/stb_image/lib",
 })
 
 links({
-	"App-Core",
-	"SDL2",
-	"glad",
-	"stb_image",
+    "App-Core",
+    "SDL2",
+    "glad",
+    "stb_image",
+    "assimp",
 })
 
 postbuildcommands({
-	"cp -r assets/ %{cfg.buildtarget.directory}",
+    "cp -r assets/ %{cfg.buildtarget.directory}",
 })
 
 filter("system:Unix")
 system("linux")
 systemversion("latest")
 defines({
-	"PLATFORM_LINUX",
+    "PLATFORM_LINUX",
 })
 
 filter("configurations:Debug")
