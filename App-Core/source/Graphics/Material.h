@@ -16,12 +16,13 @@ enum MaterialMapIndex
 struct MaterialMap
 {
     float value;
-    glm::vec4 color;
+    glm::vec3 color;
     Texture texture;
 };
 
 struct Material
 {
+    glm::vec3 ambient;
     Shader shader;
     MaterialMap maps[MATERIAL_MAP_COUNT];
 };

@@ -64,7 +64,9 @@ void Shader::Bind() { glUseProgram(id); }
 void Shader::Unbind() { glUseProgram(0); }
 
 void Shader::SetInt(s32 location, s32 val) { glUniform1i(location, val); }
+void Shader::SetFloat(s32 location, float val) { glUniform1f(location, val); }
 void Shader::SetVec2(s32 location, float* vec2) { glUniform2fv(location, 1, vec2); }
+void Shader::SetVec3(s32 location, float* vec3) { glUniform3fv(location, 1, vec3); }
 void Shader::SetVec4(s32 location, float* vec4) { glUniform4fv(location, 1, vec4); }
 void Shader::SetMat4(s32 location, float* mat4) { glUniformMatrix4fv(location, 1, GL_FALSE, mat4); }
 

@@ -18,3 +18,4 @@ struct Texture
 
 Texture LoadTexture(const char* path, TextureFormat format);
 void BindTexture(const Texture& texture, u8 slot);
+void UnbindTexture();

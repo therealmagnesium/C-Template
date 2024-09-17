@@ -61,6 +61,11 @@ InternalRenderState CreateInternalRenderState()
     InternalRenderState renderState;
     renderState.primaryCamera = NULL;
 
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+
     return renderState;
 }
 
@@ -78,12 +83,22 @@ void RenderInitShaders(InternalRenderState* renderState)
 
     renderState->defaultShader.uniformLocs[SHADER_LOC_MAP_DIFFUSE] =
         GetUniformLocation(renderState->defaultShader, "material.diffuseMap");
+    renderState->defaultShader.uniformLocs[SHADER_LOC_MAP_SPECULAR] =
+        GetUniformLocation(renderState->defaultShader, "material.specularMap");
+    renderState->defaultShader.uniformLocs[SHADER_LOC_COLOR_AMBIENT] =
+        GetUniformLocation(renderState->defaultShader, "material.ambient");
     renderState->defaultShader.uniformLocs[SHADER_LOC_COLOR_DIFFUSE] =
         GetUniformLocation(renderState->defaultShader, "material.diffuse");
+    renderState->defaultShader.uniformLocs[SHADER_LOC_COLOR_SPECULAR] =
+        GetUniformLocation(renderState->defaultShader, "material.specular");
+    renderState->defaultShader.uniformLocs[SHADER_LOC_VECTOR_VIEW] =
+        GetUniformLocation(renderState->defaultShader, "viewPosition");
     renderState->defaultShader.uniformLocs[SHADER_LOC_MATRIX_MODEL] =
-        GetUniformLocation(renderState->defaultShader, "model");
+        GetUniformLocation(renderState->defaultShader, "matModel");
     renderState->defaultShader.uniformLocs[SHADER_LOC_MATRIX_VIEW] =
-        GetUniformLocation(renderState->defaultShader, "view");
+        GetUniformLocation(renderState->defaultShader, "matView");
     renderState->defaultShader.uniformLocs[SHADER_LOC_MATRIX_PROJECTION] =
-        GetUniformLocation(renderState->defaultShader, "projection");
+        GetUniformLocation(renderState->defaultShader, "matProjection");
+    renderState->defaultShader.uniformLocs[SHADER_LOC_MATRIX_NORMAL] =
+        GetUniformLocation(renderState->defaultShader, "matNormal");
 }

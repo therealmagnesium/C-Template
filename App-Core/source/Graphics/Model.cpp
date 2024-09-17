@@ -22,7 +22,7 @@ static std::vector<Texture> LoadMaterialTextures(aiMaterial* material, aiTexture
         aiString path;
         material->GetTexture(type, i, &path);
 
-        Texture texture = LoadTexture(path.C_Str(), RGBA);
+        Texture texture = LoadTexture(path.C_Str(), RGB);
         textures.push_back(texture);
     }
 
@@ -44,12 +44,15 @@ static Mesh ProcessMesh(Model& model, aiMesh* mesh, const aiScene* scene)
         v.z = mesh->mVertices[i].z;
         vertex.position = v;
 
-        v.x = mesh->mNormals[i].x;
-        v.y = mesh->mNormals[i].y;
-        v.z = mesh->mNormals[i].z;
-        vertex.normal = v;
+        if (mesh->HasNormals())
+        {
+            v.x = mesh->mNormals[i].x;
+            v.y = mesh->mNormals[i].y;
+            v.z = mesh->mNormals[i].z;
+            vertex.normal = v;
+        }
 
-        if (mesh->mTextureCoords[0])
+        if (mesh->HasTextureCoords(0))
         {
             glm::vec2 w;
             w.x = mesh->mTextureCoords[0][i].x;
@@ -77,16 +80,25 @@ static Mesh ProcessMesh(Model& model, aiMesh* mesh, const aiScene* scene)
         Material& material = model.materials[mesh->mMaterialIndex];
 
         std::vector<Texture> diffuseMaps = LoadMaterialTextures(aiMaterial, aiTextureType_DIFFUSE);
-        material.maps[MATERIAL_MAP_DIFFUSE].color = {1.f, 1.f, 1.f, 1.f};
-
         if (diffuseMaps.size() > 0)
             material.maps[MATERIAL_MAP_DIFFUSE].texture = diffuseMaps[0];
 
         std::vector<Texture> specularMaps = LoadMaterialTextures(aiMaterial, aiTextureType_SPECULAR);
-        material.maps[MATERIAL_MAP_SPECULAR].color = {1.f, 1.f, 1.f, 1.f};
-
         if (specularMaps.size() > 0)
             material.maps[MATERIAL_MAP_SPECULAR].texture = specularMaps[0];
+
+        aiColor3D ambientColor(0.f, 0.f, 0.f);
+        aiColor3D diffuseColor(0.f, 0.f, 0.f);
+        aiColor3D specularColor(0.f, 0.f, 0.f);
+
+        if (aiMaterial->Get(AI_MATKEY_COLOR_AMBIENT, ambientColor) == AI_SUCCESS)
+            material.ambient = glm::vec3(ambientColor.r, ambientColor.g, ambientColor.b);
+
+        if (aiMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, diffuseColor) == AI_SUCCESS)
+            material.maps[MATERIAL_MAP_DIFFUSE].color = glm::vec3(diffuseColor.r, diffuseColor.g, diffuseColor.b);
+
+        if (aiMaterial->Get(AI_MATKEY_COLOR_SPECULAR, specularColor) == AI_SUCCESS)
+            material.maps[MATERIAL_MAP_SPECULAR].color = glm::vec3(specularColor.r, specularColor.g, specularColor.b);
     }
 
     return Mesh(vertices.data(), vertices.size(), indices.data(), indices.size());

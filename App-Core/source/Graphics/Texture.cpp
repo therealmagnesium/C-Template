@@ -50,3 +50,5 @@ void BindTexture(const Texture& texture, u8 slot)
     glBindTexture(GL_TEXTURE_2D, texture.id);
     glActiveTexture(GL_TEXTURE0 + slot);
 }
+
+void UnbindTexture() { glBindTexture(GL_TEXTURE_2D, 0); }

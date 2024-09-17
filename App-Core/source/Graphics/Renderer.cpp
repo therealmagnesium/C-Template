@@ -46,7 +46,12 @@ void RenderState::DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material)
     material.shader.Bind();
 
     material.shader.SetMat4(material.shader.uniformLocs[SHADER_LOC_MATRIX_MODEL], glm::value_ptr(transform));
-    material.shader.SetVec4(material.shader.uniformLocs[SHADER_LOC_COLOR_DIFFUSE],
+
+    glm::mat4 normalMatrix = glm::transpose(glm::inverse(transform));
+    material.shader.SetMat4(material.shader.uniformLocs[SHADER_LOC_MATRIX_NORMAL], glm::value_ptr(normalMatrix));
+
+    material.shader.SetVec3(material.shader.uniformLocs[SHADER_LOC_COLOR_AMBIENT], glm::value_ptr(material.ambient));
+    material.shader.SetVec3(material.shader.uniformLocs[SHADER_LOC_COLOR_DIFFUSE],
                             glm::value_ptr(material.maps[MATERIAL_MAP_DIFFUSE].color));
 
     for (u32 i = MATERIAL_MAP_DIFFUSE; i < MATERIAL_MAP_COUNT; i++)
@@ -61,6 +66,7 @@ void RenderState::DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material)
     glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, NULL);
     mesh.vertexArray.Unbind();
 
+    UnbindTexture();
     material.shader.Unbind();
 }
 
@@ -75,7 +81,7 @@ void RenderState::DrawModel(Model& model, glm::vec3 position, glm::vec3 rotation
 
     Material defaultMaterial;
     defaultMaterial.shader = state.defaultShader;
-    defaultMaterial.maps[MATERIAL_MAP_DIFFUSE].color = {1.f, 1.f, 1.f, 1.f};
+    defaultMaterial.maps[MATERIAL_MAP_DIFFUSE].color = {1.f, 1.f, 1.f};
 
     for (u64 i = 0; i < model.meshes.size(); i++)
         this->DrawMesh(model.meshes[i], model.transform, model.materials[model.meshes[i].materialIndex]);

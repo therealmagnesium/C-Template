@@ -146,6 +146,8 @@ void UpdateCameraMatrices()
         camera->projection = glm::perspective(glm::radians(45.f), aspect, 0.1f, 100.f);
 
         Renderer.state.defaultShader.Bind();
+        Renderer.state.defaultShader.SetVec3(Renderer.state.defaultShader.uniformLocs[SHADER_LOC_VECTOR_VIEW],
+                                             glm::value_ptr(camera->position));
         Renderer.state.defaultShader.SetMat4(Renderer.state.defaultShader.uniformLocs[SHADER_LOC_MATRIX_VIEW],
                                              glm::value_ptr(camera->view));
         Renderer.state.defaultShader.SetMat4(Renderer.state.defaultShader.uniformLocs[SHADER_LOC_MATRIX_PROJECTION],
