@@ -14,6 +14,7 @@ struct Camera
     float fov;
     float pitch;
     float yaw;
+    float moveSpeed;
 
     glm::vec3 position;
     glm::vec3 target;

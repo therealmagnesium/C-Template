@@ -20,7 +20,7 @@ Camera CreateCamera(glm::vec3 position, glm::vec3 up, float fov)
     camera.up = up;
     camera.target = {0.f, 0.f, 0.f};
     camera.fov = fov;
-    camera.fov = fov;
+    camera.moveSpeed = 8.f;
 
     camera.direction = camera.target - camera.position;
     camera.direction = glm::normalize(camera.direction);
@@ -37,7 +37,6 @@ Camera CreateCamera(glm::vec3 position, glm::vec3 up, float fov)
 static void UpdateCameraFree()
 {
     Camera* camera = Renderer.state.primaryCamera;
-    float speed = 3.f;
 
     // Initially set the last mouse position to the center of the screen
     static glm::vec2 lastMousePosition;
@@ -85,27 +84,27 @@ static void UpdateCameraFree()
 
     // Walk forward
     if (IsKeyDown(KEY_W))
-        camera->position += camera->direction * speed * Time.delta;
+        camera->position += camera->direction * camera->moveSpeed * Time.delta;
 
     // Walk backward
     if (IsKeyDown(KEY_S))
-        camera->position -= camera->direction * speed * Time.delta;
+        camera->position -= camera->direction * camera->moveSpeed * Time.delta;
 
     // Walk right
     if (IsKeyDown(KEY_D))
-        camera->position += camRight * speed * Time.delta;
+        camera->position += camRight * camera->moveSpeed * Time.delta;
 
     // Walk left
     if (IsKeyDown(KEY_A))
-        camera->position -= camRight * speed * Time.delta;
+        camera->position -= camRight * camera->moveSpeed * Time.delta;
 
     // Fly upwards
     if (IsKeyDown(KEY_SPACE))
-        camera->position += camera->up * speed * Time.delta;
+        camera->position += camera->up * camera->moveSpeed * Time.delta;
 
     // Fly downwards
     if (IsKeyDown(KEY_LEFT_CTRL))
-        camera->position -= camera->up * speed * Time.delta;
+        camera->position -= camera->up * camera->moveSpeed * Time.delta;
 }
 
 static void UpdateCameraOrbital() {}

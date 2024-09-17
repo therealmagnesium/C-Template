@@ -17,6 +17,7 @@ struct Material
 struct DirectionalLight
 {
     vec3 direction;
+    vec3 color;
 
     float ambientIntensity;
     float diffuseIntensity;
@@ -56,9 +57,9 @@ vec3 CalculateDiffuse(Material m, DirectionalLight d)
     vec3 diff = vec3(0.f);
 
     if (any(greaterThan(dt, vec3(0.f))))
-        diff = df * m.diffuse * dt * d.diffuseIntensity;
+        diff = df * m.diffuse * dt * d.diffuseIntensity * d.color;
     else
-        diff = df * m.diffuse * d.diffuseIntensity;
+        diff = df * m.diffuse * d.diffuseIntensity * d.color;
 
     return diff;
 }
@@ -71,7 +72,7 @@ vec3 CalculateSpecular(Material m, DirectionalLight d)
     vec3 rd = reflect(-ld, n);
     
     float sf = pow(max(dot(vd, rd), 0.f), 32.f);
-    vec3 s = d.specularIntensity * sf * m.specular;
+    vec3 s = d.specularIntensity * d.color * sf * m.specular;
     return s;
 }
 

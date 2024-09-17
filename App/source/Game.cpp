@@ -23,12 +23,14 @@ static Model toad;
 
 static void OnCreate()
 {
-    camera = CreateCamera(glm::vec3(0.f, 0.f, 2.f), glm::vec3(0.f, 1.f, 0.f), 45.f);
+    camera = CreateCamera(glm::vec3(-2.f, -1.f, 7.f), glm::vec3(0.f, 1.f, 0.f), 45.f);
+    camera.moveSpeed = 6.f;
     SetPrimaryCamera(&camera);
 
     Renderer.clearColor = {0.08f, 0.08f, 0.10f, 1.f};
 
-    directionalLight = CreateDirectionalLight(glm::vec3(0.2f, -1.f, -0.4f), Renderer.state.defaultShader);
+    directionalLight =
+        CreateDirectionalLight(glm::vec3(0.5f, -0.8f, -0.7f), glm::vec3(0.93, 0.9, 0.71), Renderer.state.defaultShader);
     man = LoadModel("assets/models/man.obj");
     toad = LoadModel("assets/models/toad.obj");
 }
@@ -37,6 +39,9 @@ static void OnUpdate()
 {
     UpdateCamera(CAMERA_FREE);
     UpdateDirectionalLight(directionalLight);
+
+    if (IsKeyPressed(KEY_C))
+        LogCameraInfo(camera);
 }
 
 static void OnRender()
