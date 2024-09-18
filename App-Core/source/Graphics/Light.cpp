@@ -10,7 +10,7 @@ DirectionalLight CreateDirectionalLight(glm::vec3 direction, glm::vec3 color, Sh
     light.direction = direction;
     light.color = color;
     light.ambientIntensity = 0.6f;
-    light.diffuseIntensity = 0.8f;
+    light.diffuseIntensity = 1.2f;
     light.specularIntensity = 0.5f;
 
     if (shader.id == 0)

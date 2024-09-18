@@ -22,7 +22,7 @@ static std::vector<Texture> LoadMaterialTextures(aiMaterial* material, aiTexture
         aiString path;
         material->GetTexture(type, i, &path);
 
-        Texture texture = LoadTexture(path.C_Str(), RGB);
+        Texture texture = LoadTexture(path.C_Str(), RGBA);
         textures.push_back(texture);
     }
 

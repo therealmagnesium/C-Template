@@ -13,11 +13,11 @@ struct GameState
 {
     AppInfo info;
 
-    void (*OnCreate)(void);
-    void (*OnUpdate)(void);
-    void (*OnRender)(void);
-    void (*OnRenderUI)(void);
-    void (*OnShutdown)(void);
+    void OnCreate();
+    void OnUpdate();
+    void OnRender();
+    void OnRenderUI();
+    void OnShutdown();
 };
 
 struct AppState

@@ -6,6 +6,8 @@
 #include "Graphics/Window.h"
 #include "Graphics/Renderer.h"
 
+#include "UI/UI.h"
+
 #include <glad/glad.h>
 
 #include <imgui.h>
@@ -53,25 +55,16 @@ void RunApplication()
         App.window.HandleEvents();
         App.game->OnUpdate();
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
-        App.game->OnRenderUI();
-        ImGui::Render();
+        BeginUIFrame();
+        {
+            App.game->OnRenderUI();
+        }
+        EndUIFrame();
 
         Renderer.BeginDrawing();
         {
             App.game->OnRender();
-
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-            if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            {
-                SDL_Window* backup_current_window = SDL_GL_GetCurrentWindow();
-                SDL_GLContext backup_current_context = SDL_GL_GetCurrentContext();
-                ImGui::UpdatePlatformWindows();
-                ImGui::RenderPlatformWindowsDefault();
-                SDL_GL_MakeCurrent(backup_current_window, backup_current_context);
-            }
+            DrawFinalUIContext();
         }
         Renderer.EndDrawing();
         UpdateTimeLate();

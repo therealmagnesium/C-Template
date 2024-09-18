@@ -7,6 +7,8 @@
 #include "Core/Log.h"
 #include "Core/Time.h"
 
+#include "UI/UI.h"
+
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_video.h>
 #include <glad/glad.h>
@@ -62,23 +64,7 @@ Window CreateWindow(AppInfo* info)
     else
         SDL_GL_SetSwapInterval(0);
 
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // Enable Docking
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // Enable Multi-Viewport / Platform Windows
-    ImGui::StyleColorsDark();
-
-    ImGuiStyle& style = ImGui::GetStyle();
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-    {
-        style.WindowRounding = 0.0f;
-        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-    }
-
-    ImGui_ImplSDL2_InitForOpenGL(window.handle, window.glContext);
-    ImGui_ImplOpenGL3_Init("#version 330");
+    InitUIContext(window);
 
     return window;
 }
@@ -95,7 +81,7 @@ void Window::HandleEvents()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-        ImGui_ImplSDL2_ProcessEvent(&event);
+        HandleUIEvents(&event);
 
         switch (event.type)
         {
@@ -179,9 +165,7 @@ void Window::HandleEvents()
 
 void Window::Close()
 {
-    ImGui_ImplSDL2_Shutdown();
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui::DestroyContext();
+    ShutdownUI();
 
     SDL_GL_DeleteContext(App.window.glContext);
     SDL_DestroyWindow(App.window.handle);
