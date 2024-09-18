@@ -17,17 +17,20 @@ includedirs({
 	"source",
 	"../vendor/glm",
 	"../vendor/glad/include",
+	"../vendor/imgui/include",
 	"../vendor/stb_image/include",
 })
 
 libdirs({
 	"../vendor/glad/lib",
+	"../vendor/imgui/lib",
 	"../vendor/stb_image/lib",
 })
 
 links({
 	"SDL2",
 	"glad",
+	"imgui",
 	"stb_image",
 	"assimp",
 })

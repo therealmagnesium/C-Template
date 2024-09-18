@@ -14,7 +14,8 @@
 #include <Graphics/Texture.h>
 
 #include <glm/glm.hpp>
-#include <glm/ext/matrix_transform.hpp>
+
+#include <imgui.h>
 
 static Camera camera;
 static DirectionalLight directionalLight;
@@ -37,11 +38,16 @@ static void OnCreate()
 
 static void OnUpdate()
 {
-    UpdateCamera(CAMERA_FREE);
-    UpdateDirectionalLight(directionalLight);
+    if (IsKeyPressed(KEY_F9))
+        App.isDebugEnabled = !App.isDebugEnabled;
+
+    if (!App.isDebugEnabled)
+        UpdateCamera(CAMERA_FREE);
 
     if (IsKeyPressed(KEY_C))
         LogCameraInfo(camera);
+
+    UpdateDirectionalLight(directionalLight);
 }
 
 static void OnRender()
@@ -50,7 +56,11 @@ static void OnRender()
     Renderer.DrawModel(toad, glm::vec3(-3.f, -2.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.4f, 0.4f, 0.4f));
 }
 
-static void OnRenderUI() {}
+static void OnRenderUI()
+{
+    if (App.isDebugEnabled)
+        ImGui::ShowDemoWindow();
+}
 
 static void OnShutdown() {}
 
