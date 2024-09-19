@@ -1,0 +1,42 @@
+#pragma once
+#include "Core/Base.h"
+#include "Core/Components.h"
+
+#include <string>
+#include <tuple>
+#include <utility>
+
+typedef std::tuple<TransformComponent, ModelComponent> ComponentTuple;
+
+class Entity
+{
+public:
+    Entity() = default;
+
+    inline u64 GetID() const { return m_id; }
+    inline b8 IsActive() const { return m_isActive; }
+    inline std::string& GetTag() { return m_tag; }
+
+    inline void SetActive(b8 active) { m_isActive = active; }
+
+    template <typename T> T& GetComponent() { return std::get<T>(m_components); }
+    template <typename T> b8 HasComponent() const { return GetComponent<T>().enabled; }
+    template <typename T, typename... TArgs> void AddComponent(TArgs&&... args)
+    {
+        auto& component = GetComponent<T>();
+        component = T(std::forward<TArgs>(args)...);
+        component.enabled = true;
+    }
+    template <typename T> void RemoveComponent() { GetComponent<T>() = T(); }
+
+private:
+    Entity(u64 id, const char* tag);
+
+private:
+    friend class EntityManager;
+
+    u64 m_id = 0;
+    b8 m_isActive = false;
+    std::string m_tag;
+    ComponentTuple m_components;
+};

@@ -53,6 +53,8 @@ void RunApplication()
     while (App.isRunning)
     {
         App.window.HandleEvents();
+
+        App.game->entityManager.Update();
         App.game->OnUpdate();
 
         BeginUIFrame();

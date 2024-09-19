@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Base.h"
+#include "Core/EntityManager.h"
 #include "Graphics/Window.h"
 
 struct AppInfo
@@ -12,6 +13,7 @@ struct AppInfo
 struct GameState
 {
     AppInfo info;
+    EntityManager entityManager;
 
     void OnCreate();
     void OnUpdate();
