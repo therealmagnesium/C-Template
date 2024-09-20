@@ -57,6 +57,8 @@ void RenderState::DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material)
     material.shader.SetVec3(material.shader.uniformLocs[SHADER_LOC_COLOR_AMBIENT], glm::value_ptr(material.ambient));
     material.shader.SetVec3(material.shader.uniformLocs[SHADER_LOC_COLOR_DIFFUSE],
                             glm::value_ptr(material.maps[MATERIAL_MAP_DIFFUSE].color));
+    material.shader.SetVec3(material.shader.uniformLocs[SHADER_LOC_COLOR_SPECULAR],
+                            glm::value_ptr(material.maps[MATERIAL_MAP_SPECULAR].color));
 
     for (u32 i = MATERIAL_MAP_DIFFUSE; i < MATERIAL_MAP_COUNT; i++)
     {

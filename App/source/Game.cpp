@@ -45,7 +45,7 @@ void GameState::OnCreate()
     daisy->AddComponent<TransformComponent>(glm::vec3(-4.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(1.f));
     daisy->AddComponent<ModelComponent>("assets/models/daisy.obj");
 
-    man = entityManager.AddEntity("Man");
+    man = entityManager.AddEntity("Cheese Man");
     man->AddComponent<TransformComponent>(glm::vec3(-2.f, 3.f, -3.f), glm::vec3(0.f), glm::vec3(1.f));
     man->AddComponent<ModelComponent>("assets/models/man.obj");
 }
