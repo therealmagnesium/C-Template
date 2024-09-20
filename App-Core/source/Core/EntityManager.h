@@ -6,21 +6,23 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <memory>
 
-typedef std::vector<Entity> EntityVec;
-typedef std::unordered_map<std::string, std::vector<Entity>> EntityMap;
+typedef std::vector<std::shared_ptr<Entity>> EntityVec;
+typedef std::unordered_map<std::string, EntityVec> EntityMap;
 
 class EntityManager
 {
 public:
     EntityManager() = default;
+    std::shared_ptr<Entity> AddEntity(const char* tag);
     void Update();
-    Entity AddEntity(const char* tag);
+    void DrawEntities();
 
     inline u64 GetEntityCount() { return m_totalEntities; }
 
-    std::vector<Entity>& GetEntities();
-    std::vector<Entity>& GetEntities(const char* tag);
+    EntityVec& GetEntities();
+    EntityVec& GetEntities(const char* tag);
 
 private:
     u64 m_totalEntities = 0;

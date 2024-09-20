@@ -18,10 +18,13 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <imgui.h>
+#include <memory>
 
 static Camera camera;
 static DirectionalLight directionalLight;
-static Entity entity;
+static std::shared_ptr<Entity> kamek;
+static std::shared_ptr<Entity> daisy;
+static std::shared_ptr<Entity> man;
 
 void GameState::OnCreate()
 {
@@ -34,9 +37,17 @@ void GameState::OnCreate()
     directionalLight = CreateDirectionalLight(glm::vec3(-0.5f, -0.8f, -0.7f), glm::vec3(0.93, 0.9, 0.71),
                                               Renderer.state.defaultShader);
 
-    entity = entityManager.AddEntity("Entity");
-    entity.AddComponent<TransformComponent>();
-    entity.AddComponent<ModelComponent>("assets/models/daisy.obj");
+    kamek = entityManager.AddEntity("Kamek");
+    kamek->AddComponent<TransformComponent>();
+    kamek->AddComponent<ModelComponent>("assets/models/kamek.obj");
+
+    daisy = entityManager.AddEntity("Daisy");
+    daisy->AddComponent<TransformComponent>(glm::vec3(-4.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(1.f));
+    daisy->AddComponent<ModelComponent>("assets/models/daisy.obj");
+
+    man = entityManager.AddEntity("Man");
+    man->AddComponent<TransformComponent>(glm::vec3(-2.f, 3.f, -3.f), glm::vec3(0.f), glm::vec3(1.f));
+    man->AddComponent<ModelComponent>("assets/models/man.obj");
 }
 
 void GameState::OnUpdate()
@@ -53,14 +64,7 @@ void GameState::OnUpdate()
     UpdateDirectionalLight(directionalLight);
 }
 
-void GameState::OnRender()
-{
-    TransformComponent& tc = entity.GetComponent<TransformComponent>();
-    ModelComponent& mc = entity.GetComponent<ModelComponent>();
-
-    if (entity.IsActive())
-        Renderer.DrawModel(mc.model, tc.position, tc.rotation, tc.scale);
-}
+void GameState::OnRender() {}
 
 void GameState::OnRenderUI()
 {
@@ -78,15 +82,29 @@ void GameState::OnRenderUI()
 
         ImGui::Begin("Entity Heirarchy");
         {
-            TransformComponent& entityTransform = entity.GetComponent<TransformComponent>();
-            b8 entityIsActive = entity.IsActive();
+            for (u64 i = 0; i < entityManager.GetEntityCount(); i++)
+            {
+                std::shared_ptr<Entity> e = entityManager.GetEntities()[i];
 
-            ImGui::Checkbox("Entity active?", &entityIsActive);
-            ImGui::DragFloat3("Entity position", glm::value_ptr(entityTransform.position), 0.01f);
-            ImGui::DragFloat3("Entity rotation", glm::value_ptr(entityTransform.rotation), 0.1f);
-            ImGui::DragFloat3("Entity scale", glm::value_ptr(entityTransform.scale), 0.01f);
+                b8 isActive = e->IsActive();
+                ImGui::Checkbox(TextFormat("%s active?", e->GetTag()), &isActive);
+                e->SetActive(isActive);
 
-            entity.SetActive(entityIsActive);
+                if (e->HasComponent<TransformComponent>())
+                {
+                    TransformComponent& tc = e->GetComponent<TransformComponent>();
+                    ImGui::DragFloat3(TextFormat("%s position", e->GetTag()), glm::value_ptr(tc.position), 0.01f);
+                    ImGui::DragFloat3(TextFormat("%s rotation", e->GetTag()), glm::value_ptr(tc.rotation), 0.1f);
+                    ImGui::DragFloat3(TextFormat("%s scale", e->GetTag()), glm::value_ptr(tc.scale), 0.01f);
+                }
+
+                if (e->HasComponent<ModelComponent>())
+                {
+                    ModelComponent& mc = e->GetComponent<ModelComponent>();
+                    ImGui::Text("%s mesh count: %ld", e->GetTag(), mc.model.meshes.size());
+                    ImGui::Text("%s material count: %ld", e->GetTag(), mc.model.materials.size());
+                }
+            }
         }
         ImGui::End();
     }

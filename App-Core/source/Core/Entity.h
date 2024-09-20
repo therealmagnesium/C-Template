@@ -2,6 +2,7 @@
 #include "Core/Base.h"
 #include "Core/Components.h"
 
+#include <assert.h>
 #include <string>
 #include <tuple>
 #include <utility>
@@ -12,26 +13,26 @@ class Entity
 {
 public:
     Entity() = default;
+    Entity(u64 id, const char* tag);
 
     inline u64 GetID() const { return m_id; }
     inline b8 IsActive() const { return m_isActive; }
-    inline std::string& GetTag() { return m_tag; }
+    inline const char* GetTag() { return m_tag.c_str(); }
 
     inline void SetActive(b8 active) { m_isActive = active; }
 
     template <typename T> T& GetComponent() { return std::get<T>(m_components); }
+    template <typename T> const T& GetComponent() const { return std::get<T>(m_components); }
     template <typename T> b8 HasComponent() const { return GetComponent<T>().enabled; }
     template <typename T, typename... TArgs> void AddComponent(TArgs&&... args)
     {
-        auto& component = GetComponent<T>();
+        T& component = GetComponent<T>();
         component = T(std::forward<TArgs>(args)...);
         component.enabled = true;
     }
     template <typename T> void RemoveComponent() { GetComponent<T>() = T(); }
 
 private:
-    Entity(u64 id, const char* tag);
-
 private:
     friend class EntityManager;
 

@@ -66,6 +66,7 @@ void RunApplication()
         Renderer.BeginDrawing();
         {
             App.game->OnRender();
+            App.game->entityManager.DrawEntities();
             DrawFinalUIContext();
         }
         Renderer.EndDrawing();

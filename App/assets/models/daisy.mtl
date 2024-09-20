@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd /home/magnesium/Downloads/Wii - Mario Party 8 - Daisy/Daisy/Daisy_body1.png
+map_Kd /home/magnesium/dev/C++/Template/App/assets/textures/daisy/Daisy_body1.png
 
 newmtl body2
 Ns 10.000002
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd /home/magnesium/Downloads/Wii - Mario Party 8 - Daisy/Daisy/Daisy_body2.png
+map_Kd /home/magnesium/dev/C++/Template/App/assets/textures/daisy/Daisy_body2.png
 
 newmtl body3
 Ns 10.000002
@@ -32,9 +32,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd /home/magnesium/Downloads/Wii - Mario Party 8 - Daisy/Daisy/Daisy_body3.png
+map_Kd /home/magnesium/dev/C++/Template/App/assets/textures/daisy/Daisy_body3.png
 
-newmtl eye2
+newmtl eyes
 Ns 10.000002
 Ka 1.000000 1.000000 1.000000
 Kd 0.588200 0.588200 0.588200
@@ -43,4 +43,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd /home/magnesium/Downloads/Wii - Mario Party 8 - Daisy/Daisy/Daisy_eyeball1.png
+map_Kd /home/magnesium/dev/C++/Template/App/assets/textures/daisy/Daisy_eyeball1.png
