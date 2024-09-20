@@ -22,6 +22,7 @@
 
 static Camera camera;
 static DirectionalLight directionalLight;
+static Spotlight spotlight;
 static std::shared_ptr<Entity> kamek;
 static std::shared_ptr<Entity> daisy;
 static std::shared_ptr<Entity> man;
@@ -34,8 +35,11 @@ void GameState::OnCreate()
 
     Renderer.clearColor = {0.08f, 0.08f, 0.10f, 1.f};
 
+    /*
     directionalLight = CreateDirectionalLight(glm::vec3(-0.5f, -0.8f, -0.7f), glm::vec3(0.93, 0.9, 0.71),
-                                              Renderer.state.defaultShader);
+                                              Renderer.state.defaultShader);*/
+    spotlight =
+        CreateSpotlight(camera.position, camera.direction, glm::vec3(0.93, 0.9, 0.71), Renderer.state.defaultShader);
 
     kamek = entityManager.AddEntity("Kamek");
     kamek->AddComponent<TransformComponent>();
@@ -61,7 +65,10 @@ void GameState::OnUpdate()
     if (IsKeyPressed(KEY_C))
         LogCameraInfo(camera);
 
-    UpdateDirectionalLight(directionalLight);
+    // UpdateDirectionalLight(directionalLight);
+    UpdateSpotlight(spotlight);
+    spotlight.position = camera.position;
+    spotlight.direction = camera.direction;
 }
 
 void GameState::OnRender() {}
