@@ -3,8 +3,9 @@
 #include "Core/Log.h"
 #include "Core/Time.h"
 
-#include "Graphics/Window.h"
+#include "Graphics/Framebuffer.h"
 #include "Graphics/Renderer.h"
+#include "Graphics/Window.h"
 
 #include "UI/UI.h"
 
@@ -30,8 +31,13 @@ void CreateApplication(GameState* game)
 
     App.isRunning = true;
     App.game = game;
-    App.window = CreateWindow(&game->info);
     App.isDebugEnabled = false;
+    App.window = CreateWindow(&game->info);
+
+    FramebufferSpecification fbSpec;
+    fbSpec.width = App.window.width;
+    fbSpec.height = App.window.height;
+    App.framebuffer = CreateFramebuffer(fbSpec);
 
     InitRenderer();
 
@@ -63,13 +69,20 @@ void RunApplication()
         }
         EndUIFrame();
 
-        Renderer.BeginDrawing();
+        App.framebuffer.Bind();
         {
+            Renderer.BeginDrawing();
             App.game->OnRender();
             App.game->entityManager.DrawEntities();
+        }
+        App.framebuffer.Unbind();
+
+        Renderer.BeginDrawing();
+        {
             DrawFinalUIContext();
         }
         Renderer.EndDrawing();
+
         UpdateTimeLate();
     }
 

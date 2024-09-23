@@ -17,6 +17,7 @@ public:
 
     inline u64 GetID() const { return m_id; }
     inline b8 IsActive() const { return m_isActive; }
+    inline b8 IsAlive() const { return m_isAlive; }
     inline const char* GetTag() { return m_tag.c_str(); }
 
     inline void SetActive(b8 active) { m_isActive = active; }
@@ -38,6 +39,7 @@ private:
 
     u64 m_id = 0;
     b8 m_isActive = false;
+    b8 m_isAlive = true;
     std::string m_tag;
     ComponentTuple m_components;
 };

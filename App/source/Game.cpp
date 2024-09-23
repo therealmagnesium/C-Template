@@ -14,6 +14,8 @@
 #include <Graphics/Renderer.h>
 #include <Graphics/Texture.h>
 
+#include <UI/UI.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -35,11 +37,11 @@ void GameState::OnCreate()
 
     Renderer.clearColor = {0.08f, 0.08f, 0.10f, 1.f};
 
-    /*
     directionalLight = CreateDirectionalLight(glm::vec3(-0.5f, -0.8f, -0.7f), glm::vec3(0.93, 0.9, 0.71),
-                                              Renderer.state.defaultShader);*/
+                                              Renderer.state.defaultShader);
+    /*
     spotlight =
-        CreateSpotlight(camera.position, camera.direction, glm::vec3(0.93, 0.9, 0.71), Renderer.state.defaultShader);
+        CreateSpotlight(camera.position, camera.direction, glm::vec3(0.93, 0.9, 0.71), Renderer.state.defaultShader);*/
 
     kamek = entityManager.AddEntity("Kamek");
     kamek->AddComponent<TransformComponent>();
@@ -65,56 +67,63 @@ void GameState::OnUpdate()
     if (IsKeyPressed(KEY_C))
         LogCameraInfo(camera);
 
-    // UpdateDirectionalLight(directionalLight);
+    UpdateDirectionalLight(directionalLight);
+
+    /*
     UpdateSpotlight(spotlight);
     spotlight.position = camera.position;
-    spotlight.direction = camera.direction;
+    spotlight.direction = camera.direction;*/
 }
 
 void GameState::OnRender() {}
 
 void GameState::OnRenderUI()
 {
-    if (App.isDebugEnabled)
+    ImGui::DockSpaceOverViewport();
+    ImGui::Begin("Lighting Menu");
     {
-        ImGui::Begin("Lighting Menu");
-        {
-            ImGui::DragFloat3("Light direction", glm::value_ptr(directionalLight.direction), 0.01f, -1.f, 1.f);
-            ImGui::DragFloat("Ambient intensity", &directionalLight.ambientIntensity, 0.01f);
-            ImGui::DragFloat("Diffuse intensity", &directionalLight.diffuseIntensity, 0.01f);
-            ImGui::DragFloat("Specular intensity", &directionalLight.specularIntensity, 0.01f);
-            ImGui::ColorPicker3("Light color", glm::value_ptr(directionalLight.color));
-        }
-        ImGui::End();
+        ImGui::DragFloat3("Light direction", glm::value_ptr(directionalLight.direction), 0.01f, -1.f, 1.f);
+        ImGui::DragFloat("Ambient intensity", &directionalLight.ambientIntensity, 0.01f);
+        ImGui::DragFloat("Diffuse intensity", &directionalLight.diffuseIntensity, 0.01f);
+        ImGui::DragFloat("Specular intensity", &directionalLight.specularIntensity, 0.01f);
+        ImGui::ColorPicker3("Light color", glm::value_ptr(directionalLight.color));
+    }
+    ImGui::End();
 
-        ImGui::Begin("Entity Heirarchy");
+    ImGui::Begin("Entity Heirarchy");
+    {
+        for (u64 i = 0; i < entityManager.GetEntityCount(); i++)
         {
-            for (u64 i = 0; i < entityManager.GetEntityCount(); i++)
+            std::shared_ptr<Entity> e = entityManager.GetEntities()[i];
+
+            b8 isActive = e->IsActive();
+            ImGui::Checkbox(TextFormat("%s active?", e->GetTag()), &isActive);
+            e->SetActive(isActive);
+
+            if (e->HasComponent<TransformComponent>())
             {
-                std::shared_ptr<Entity> e = entityManager.GetEntities()[i];
+                TransformComponent& tc = e->GetComponent<TransformComponent>();
+                ImGui::DragFloat3(TextFormat("%s position", e->GetTag()), glm::value_ptr(tc.position), 0.01f);
+                ImGui::DragFloat3(TextFormat("%s rotation", e->GetTag()), glm::value_ptr(tc.rotation), 0.1f);
+                ImGui::DragFloat3(TextFormat("%s scale", e->GetTag()), glm::value_ptr(tc.scale), 0.01f);
+            }
 
-                b8 isActive = e->IsActive();
-                ImGui::Checkbox(TextFormat("%s active?", e->GetTag()), &isActive);
-                e->SetActive(isActive);
-
-                if (e->HasComponent<TransformComponent>())
-                {
-                    TransformComponent& tc = e->GetComponent<TransformComponent>();
-                    ImGui::DragFloat3(TextFormat("%s position", e->GetTag()), glm::value_ptr(tc.position), 0.01f);
-                    ImGui::DragFloat3(TextFormat("%s rotation", e->GetTag()), glm::value_ptr(tc.rotation), 0.1f);
-                    ImGui::DragFloat3(TextFormat("%s scale", e->GetTag()), glm::value_ptr(tc.scale), 0.01f);
-                }
-
-                if (e->HasComponent<ModelComponent>())
-                {
-                    ModelComponent& mc = e->GetComponent<ModelComponent>();
-                    ImGui::Text("%s mesh count: %ld", e->GetTag(), mc.model.meshes.size());
-                    ImGui::Text("%s material count: %ld", e->GetTag(), mc.model.materials.size());
-                }
+            if (e->HasComponent<ModelComponent>())
+            {
+                ModelComponent& mc = e->GetComponent<ModelComponent>();
+                ImGui::Text("%s mesh count: %ld", e->GetTag(), mc.model.meshes.size());
+                ImGui::Text("%s material count: %ld", e->GetTag(), mc.model.materials.size());
             }
         }
-        ImGui::End();
     }
+    ImGui::End();
+
+    ImGui::Begin("Viewport");
+    {
+        u64 texId = (u64)App.framebuffer.colorAttachment;
+        ImGui::Image((void*)texId, {(float)App.window.width, (float)App.window.height}, {0.f, 1.f}, {1.f, 0.f});
+    }
+    ImGui::End();
 }
 
 void GameState::OnShutdown() {}

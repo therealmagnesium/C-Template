@@ -1,6 +1,8 @@
 #pragma once
 #include "Core/Base.h"
 #include "Core/EntityManager.h"
+
+#include "Graphics/Framebuffer.h"
 #include "Graphics/Window.h"
 
 struct AppInfo
@@ -26,6 +28,7 @@ struct AppState
 {
     b8 isRunning;
     b8 isDebugEnabled;
+    Framebuffer framebuffer;
     Window window;
     GameState* game;
 };

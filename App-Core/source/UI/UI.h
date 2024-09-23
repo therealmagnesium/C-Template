@@ -6,6 +6,7 @@
 
 void InitUIContext(const Window& window);
 void HandleUIEvents(const SDL_Event* event);
+void SetupDockspace();
 void BeginUIFrame();
 void EndUIFrame();
 void DrawFinalUIContext();

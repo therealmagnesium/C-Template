@@ -1,4 +1,5 @@
 #include "UI/UI.h"
+#include "Core/Application.h"
 
 #include <imgui.h>
 #include <imgui_impl_opengl3.h>
@@ -29,6 +30,20 @@ void HandleUIEvents(const SDL_Event* event)
 {
     if (event)
         ImGui_ImplSDL2_ProcessEvent(event);
+}
+
+void SetupDockspace()
+{
+    u32 windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+    ImGui::SetNextWindowPos({0.f, 0.f});
+    ImGui::SetNextWindowSize({(float)App.window.width, (float)App.window.height});
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.f);
+
+    windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+                   ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+
+    ImGui::DockSpace(ImGui::GetID("Viewport"));
 }
 
 void BeginUIFrame()

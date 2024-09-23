@@ -27,7 +27,7 @@ void EntityManager::Update()
     {
         auto& entity = m_entities[i];
         const char* entityTag = entity->GetTag();
-        if (!entity->IsActive())
+        if (!entity->IsAlive())
         {
             m_entities.erase(m_entities.begin() + i);
             m_entityMap[entityTag].erase(m_entities.begin() + i);
@@ -47,7 +47,8 @@ void EntityManager::DrawEntities()
             TransformComponent& tc = entity->GetComponent<TransformComponent>();
             ModelComponent& mc = entity->GetComponent<ModelComponent>();
 
-            Renderer.DrawModel(mc.model, tc.position, tc.rotation, tc.scale);
+            if (entity->IsActive())
+                Renderer.DrawModel(mc.model, tc.position, tc.rotation, tc.scale);
         }
     }
 }
