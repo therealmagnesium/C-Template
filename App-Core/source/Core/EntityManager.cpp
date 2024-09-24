@@ -48,7 +48,14 @@ void EntityManager::DrawEntities()
             ModelComponent& mc = entity->GetComponent<ModelComponent>();
 
             if (entity->IsActive())
+            {
+                if (mc.culling)
+                    Renderer.EnableCulling(FACE_BACK);
+                else
+                    Renderer.DisableCulling();
+
                 Renderer.DrawModel(mc.model, tc.position, tc.rotation, tc.scale);
+            }
         }
     }
 }

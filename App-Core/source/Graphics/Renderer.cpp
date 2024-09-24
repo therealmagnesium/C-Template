@@ -42,6 +42,30 @@ void RenderState::BeginDrawing()
 
 void RenderState::EndDrawing() { SDL_GL_SwapWindow(App.window.handle); }
 
+void RenderState::EnableCulling(SurfaceFace face)
+{
+    switch (face)
+    {
+        case FACE_FRONT:
+        {
+            glCullFace(GL_FRONT);
+            glFrontFace(state.frontFace);
+            break;
+        }
+        case FACE_BACK:
+        {
+            glCullFace(GL_BACK);
+            glFrontFace(state.frontFace);
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
+void RenderState::DisableCulling() { glDisable(GL_CULL_FACE); }
+
 void RenderState::DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material)
 {
     if (material.shader.id == 0)

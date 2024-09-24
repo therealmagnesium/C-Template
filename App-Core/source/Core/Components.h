@@ -27,6 +27,7 @@ struct TransformComponent
 struct ModelComponent
 {
     b8 enabled = false;
+    b8 culling = true;
     Model model;
 
     ModelComponent() = default;

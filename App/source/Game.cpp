@@ -28,11 +28,12 @@ static Spotlight spotlight;
 static std::shared_ptr<Entity> kamek;
 static std::shared_ptr<Entity> daisy;
 static std::shared_ptr<Entity> man;
+static std::shared_ptr<Entity> church;
 
 void GameState::OnCreate()
 {
     camera = CreateCamera(glm::vec3(-2.f, 1.f, 7.f), glm::vec3(0.f, 1.f, 0.f), 45.f);
-    camera.moveSpeed = 6.f;
+    camera.moveSpeed = 20.f;
     SetPrimaryCamera(&camera);
 
     Renderer.clearColor = {0.08f, 0.08f, 0.10f, 1.f};
@@ -54,6 +55,10 @@ void GameState::OnCreate()
     man = entityManager.AddEntity("Cheese Man");
     man->AddComponent<TransformComponent>(glm::vec3(-2.f, 3.f, -3.f), glm::vec3(0.f), glm::vec3(1.f));
     man->AddComponent<ModelComponent>("assets/models/man.obj");
+
+    man = entityManager.AddEntity("Church");
+    man->AddComponent<TransformComponent>(glm::vec3(0.f, -15.f, 0.f), glm::vec3(0.f), glm::vec3(2.5f));
+    man->AddComponent<ModelComponent>("assets/models/church.obj").culling = false;
 }
 
 void GameState::OnUpdate()

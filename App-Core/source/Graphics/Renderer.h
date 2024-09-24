@@ -14,6 +14,8 @@ struct RenderState
 
     void BeginDrawing();
     void EndDrawing();
+    void EnableCulling(SurfaceFace face);
+    void DisableCulling();
     void DrawMesh(Mesh& mesh, glm::mat4& transform, Material& material);
     void DrawModel(Model& model, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 };

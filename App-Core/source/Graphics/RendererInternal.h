@@ -6,6 +6,12 @@
 
 #include <glm/glm.hpp>
 
+enum SurfaceFace
+{
+    FACE_BACK = 0,
+    FACE_FRONT,
+};
+
 struct Vertex
 {
     glm::vec3 position;
@@ -42,6 +48,7 @@ struct IndexBuffer
 
 struct InternalRenderState
 {
+    u32 frontFace;
     Shader defaultShader;
     Camera* primaryCamera;
 };
