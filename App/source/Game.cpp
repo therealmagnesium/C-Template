@@ -120,6 +120,7 @@ void GameState::OnRenderUI()
 
     ImGui::Begin("Viewport", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
     {
+        camera.isLocked = !ImGui::IsWindowHovered();
         ImVec2 aspectSize = GetLargestViewportSize();
         ImVec2 windowPosition = GetCenteredViewportPosition(aspectSize);
         ImGui::SetCursorPos(windowPosition);

@@ -15,6 +15,7 @@ struct Camera
     float pitch;
     float yaw;
     float moveSpeed;
+    b8 isLocked;
 
     glm::vec3 position;
     glm::vec3 target;

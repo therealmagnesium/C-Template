@@ -21,6 +21,7 @@ Camera CreateCamera(glm::vec3 position, glm::vec3 up, float fov)
     camera.target = {0.f, 0.f, 0.f};
     camera.fov = fov;
     camera.moveSpeed = 8.f;
+    camera.isLocked = false;
 
     camera.direction = camera.target - camera.position;
     camera.direction = glm::normalize(camera.direction);
@@ -38,21 +39,17 @@ static void UpdateCameraFree()
 {
     Camera* camera = Renderer.state.primaryCamera;
 
-    // Initially set the last mouse position to the center of the screen
     static glm::vec2 lastMousePosition;
-    b8 isFirstClick = true;
-
-    if (isFirstClick && IsMouseClicked(MOUSE_BUTTON_LEFT))
-    {
-        lastMousePosition.x = Input.mouse.position.x;
-        lastMousePosition.y = Input.mouse.position.y;
-        isFirstClick = false;
-    }
-
     glm::vec2 mouseOffset = {0.f, 0.f};
 
     if (IsMouseDown(MOUSE_BUTTON_LEFT))
     {
+        if (IsMouseClicked(MOUSE_BUTTON_LEFT))
+        {
+            lastMousePosition.x = Input.mouse.position.x;
+            lastMousePosition.y = Input.mouse.position.y;
+        }
+
         mouseOffset.x = Input.mouse.position.x - lastMousePosition.x;
         mouseOffset.y = lastMousePosition.y - Input.mouse.position.y;
         lastMousePosition.x = Input.mouse.position.x;
@@ -111,7 +108,7 @@ static void UpdateCameraOrbital() {}
 
 void UpdateCamera(CameraType type)
 {
-    if (Renderer.state.primaryCamera)
+    if (Renderer.state.primaryCamera && !Renderer.state.primaryCamera->isLocked)
     {
         switch (type)
         {

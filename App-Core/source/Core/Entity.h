@@ -21,6 +21,7 @@ public:
     inline const char* GetTag() { return m_tag.c_str(); }
 
     inline void SetActive(b8 active) { m_isActive = active; }
+    inline void Destroy() { m_isAlive = false; }
 
     template <typename T> T& GetComponent() { return std::get<T>(m_components); }
     template <typename T> const T& GetComponent() const { return std::get<T>(m_components); }
@@ -33,7 +34,6 @@ public:
     }
     template <typename T> void RemoveComponent() { GetComponent<T>() = T(); }
 
-private:
 private:
     friend class EntityManager;
 
