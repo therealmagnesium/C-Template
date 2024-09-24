@@ -31,7 +31,7 @@ static std::shared_ptr<Entity> man;
 
 void GameState::OnCreate()
 {
-    camera = CreateCamera(glm::vec3(-2.f, 0.f, 7.f), glm::vec3(0.f, 1.f, 0.f), 45.f);
+    camera = CreateCamera(glm::vec3(-2.f, 1.f, 7.f), glm::vec3(0.f, 1.f, 0.f), 45.f);
     camera.moveSpeed = 6.f;
     SetPrimaryCamera(&camera);
 
@@ -118,10 +118,14 @@ void GameState::OnRenderUI()
     }
     ImGui::End();
 
-    ImGui::Begin("Viewport");
+    ImGui::Begin("Viewport", NULL, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
     {
+        ImVec2 aspectSize = GetLargestViewportSize();
+        ImVec2 windowPosition = GetCenteredViewportPosition(aspectSize);
+        ImGui::SetCursorPos(windowPosition);
+
         u64 texId = (u64)App.framebuffer.colorAttachment;
-        ImGui::Image((void*)texId, {(float)App.window.width, (float)App.window.height}, {0.f, 1.f}, {1.f, 0.f});
+        ImGui::Image((void*)texId, aspectSize, {0.f, 1.f}, {1.f, 0.f});
     }
     ImGui::End();
 }

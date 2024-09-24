@@ -32,18 +32,37 @@ void HandleUIEvents(const SDL_Event* event)
         ImGui_ImplSDL2_ProcessEvent(event);
 }
 
-void SetupDockspace()
+ImVec2 GetLargestViewportSize()
 {
-    u32 windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-    ImGui::SetNextWindowPos({0.f, 0.f});
-    ImGui::SetNextWindowSize({(float)App.window.width, (float)App.window.height});
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.f);
+    ImVec2 windowSize = ImGui::GetContentRegionAvail();
+    windowSize.x -= ImGui::GetScrollX();
+    windowSize.y -= ImGui::GetScrollY();
 
-    windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
-                   ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+    float aspect = (float)App.window.width / App.window.height;
+    float aspectWidth = windowSize.x;
+    float aspectHeight = aspectWidth / aspect;
 
-    ImGui::DockSpace(ImGui::GetID("Viewport"));
+    if (aspectHeight > windowSize.y)
+    {
+        aspectHeight = windowSize.y;
+        aspectWidth = aspectHeight * aspect;
+    }
+    return ImVec2(aspectWidth, aspectHeight);
+}
+
+ImVec2 GetCenteredViewportPosition(ImVec2 aspectSize)
+{
+    ImVec2 windowSize = ImGui::GetContentRegionAvail();
+    windowSize.x -= ImGui::GetScrollX();
+    windowSize.y -= ImGui::GetScrollY();
+
+    ImVec2 viewportPosition;
+    viewportPosition.x = (windowSize.x / 2.f) - (aspectSize.x / 2.f);
+    viewportPosition.y = (windowSize.y / 2.f) - (aspectSize.y / 2.f);
+    viewportPosition.x += ImGui::GetCursorPosX();
+    viewportPosition.y += ImGui::GetCursorPosY();
+
+    return viewportPosition;
 }
 
 void BeginUIFrame()
