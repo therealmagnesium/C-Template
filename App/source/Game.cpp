@@ -52,13 +52,13 @@ void GameState::OnCreate()
     daisy->AddComponent<TransformComponent>(glm::vec3(-4.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(1.f));
     daisy->AddComponent<ModelComponent>("assets/models/daisy.obj");
 
-    man = entityManager.AddEntity("Cheese Man");
+    man = entityManager.AddEntity("Man");
     man->AddComponent<TransformComponent>(glm::vec3(-2.f, 3.f, -3.f), glm::vec3(0.f), glm::vec3(1.f));
     man->AddComponent<ModelComponent>("assets/models/man.obj");
 
-    man = entityManager.AddEntity("Church");
-    man->AddComponent<TransformComponent>(glm::vec3(0.f, -15.f, 0.f), glm::vec3(0.f), glm::vec3(2.5f));
-    man->AddComponent<ModelComponent>("assets/models/church.obj").culling = false;
+    man = entityManager.AddEntity("Boxing Ring");
+    man->AddComponent<TransformComponent>(glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(2.5f));
+    man->AddComponent<ModelComponent>("assets/models/boxing_ring.obj").culling = false;
 }
 
 void GameState::OnUpdate()

@@ -1,0 +1,338 @@
+# Blender MTL File: 'None'
+# Material Count: 28
+
+newmtl Tex_0139_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0139_0.png
+map_Ka assets/textures/boxing_ring/Tex_0139_0.png
+
+newmtl Tex_0141_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0141_0.png
+map_Ka assets/textures/boxing_ring/Tex_0141_0.png
+
+newmtl Tex_0142_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0142_0.png
+map_Ka assets/textures/boxing_ring/Tex_0142_0.png
+
+newmtl Tex_0143_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0143_0.png
+map_Ka assets/textures/boxing_ring/Tex_0143_0.png
+
+newmtl Tex_0144_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0144_0.png
+map_Ka assets/textures/boxing_ring/Tex_0144_0.png
+
+newmtl Tex_0145_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0145_0.png
+map_Ka assets/textures/boxing_ring/Tex_0145_0.png
+
+newmtl Tex_0146_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0146_0.png
+map_Ka assets/textures/boxing_ring/Tex_0146_0.png
+
+newmtl Tex_0147_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0147_0.png
+map_Ka assets/textures/boxing_ring/Tex_0147_0.png
+
+newmtl Tex_0148_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0148_0.png
+map_Ka assets/textures/boxing_ring/Tex_0148_0.png
+
+newmtl Tex_0149_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0149_0.png
+map_Ka assets/textures/boxing_ring/Tex_0149_0.png
+
+newmtl Tex_0150_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0150_0.png
+map_Ka assets/textures/boxing_ring/Tex_0150_0.png
+
+newmtl Tex_0151_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0151_0.png
+map_Ka assets/textures/boxing_ring/Tex_0151_0.png
+
+newmtl Tex_0152_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0152_0.png
+map_Ka assets/textures/boxing_ring/Tex_0152_0.png
+
+newmtl Tex_0153_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0153_0.png
+map_Ka assets/textures/boxing_ring/Tex_0153_0.png
+
+newmtl Tex_0154_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0154_0.png
+map_Ka assets/textures/boxing_ring/Tex_0154_0.png
+
+newmtl Tex_0155_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0155_0.png
+map_Ka assets/textures/boxing_ring/Tex_0155_0.png
+
+newmtl Tex_0156_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0156_0.png
+map_Ka assets/textures/boxing_ring/Tex_0156_0.png
+
+newmtl Tex_0157_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0157_0.png
+map_Ka assets/textures/boxing_ring/Tex_0157_0.png
+
+newmtl Tex_0158_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0158_0.png
+map_Ka assets/textures/boxing_ring/Tex_0158_0.png
+
+newmtl Tex_0159_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0159_0.png
+map_Ka assets/textures/boxing_ring/Tex_0159_0.png
+
+newmtl Tex_0160_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0160_0.png
+map_Ka assets/textures/boxing_ring/Tex_0160_0.png
+
+newmtl Tex_0161_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0161_0.png
+map_Ka assets/textures/boxing_ring/Tex_0161_0.png
+
+newmtl Tex_0162_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0162_0.png
+map_Ka assets/textures/boxing_ring/Tex_0162_0.png
+
+newmtl Tex_0163_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0163_0.png
+map_Ka assets/textures/boxing_ring/Tex_0163_0.png
+
+newmtl Tex_0166_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0166_0.png
+map_Ka assets/textures/boxing_ring/Tex_0166_0.png
+
+newmtl Tex_0168_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0168_0.png
+map_Ka assets/textures/boxing_ring/Tex_0168_0.png
+
+newmtl Tex_0169_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0169_0.png
+map_Ka assets/textures/boxing_ring/Tex_0169_0.png
+
+newmtl Tex_0171_0_png
+Ns 9.803922
+Ka 0.588000 0.588000 0.588000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd assets/textures/boxing_ring/Tex_0171_0.png
+map_Ka assets/textures/boxing_ring/Tex_0171_0.png
